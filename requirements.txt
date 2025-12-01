@@ -1,0 +1,6 @@
+beautifulsoup4
+networkx
+Pillow
+pytesseract
+requests
+sympy

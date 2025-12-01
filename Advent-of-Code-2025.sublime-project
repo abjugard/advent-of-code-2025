@@ -1,0 +1,81 @@
+{
+    "build_systems":
+    [
+        {
+            "env":
+            {
+                "PYTHONIOENCODING": "utf8",
+            },
+            "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+            "name": "Project: PyPy 3",
+            "selector": "source.python",
+            "shell_cmd": "pypy3.10 -u \"$file\"",
+            "path": "/opt/homebrew/opt/pypy3.10/bin:/opt/homebrew/opt/pypy3.10/libexec/bin:$PATH",
+            "windows":
+            {
+                "shell_cmd": "pypy3.10 -u \"$file\"",
+            },
+        },
+        {
+            "env":
+            {
+                "PYTHONIOENCODING": "utf8",
+            },
+            "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+            "name": "Project: Python 3",
+            "selector": "source.python",
+            "shell_cmd": "python3.13 -u \"$file\"",
+            "path": "/opt/homebrew/opt/python@3.13/bin:/opt/homebrew/opt/python@3.13/libexec/bin:$PATH",
+            "windows":
+            {
+                "shell_cmd": "python3.13 -u \"$file\"",
+            },
+        },
+    ],
+    "folders":
+    [
+        {
+            "name": "Source code",
+            "path": "src",
+            "file_exclude_patterns":
+            [
+                "*.pyc"
+            ],
+            "folder_exclude_patterns":
+            [
+                "__pycache__"
+            ],
+        },
+        {
+            "name": "Puzzle data",
+            "path": "data",
+        },
+        {
+            "name": "Answers",
+            "path": ".submission-history",
+        },
+        {
+            "name": "Misc",
+            "path": "misc",
+        },
+        {
+            "name": "Project",
+            "path": ".",
+            "folder_exclude_patterns":
+            [
+                "*"
+            ],
+        }
+    ],
+    "settings": {
+        "pep8_ignore":
+        [
+            "E114",
+            "E111",
+            "E121",
+            "E309",
+            "E401",
+            "E704"
+        ],
+    },
+}
