@@ -1,40 +1,30 @@
 from santas_little_helpers import day, get_data, timed
-from santas_little_submission_helper import submit_answer
-from santas_little_utils import *
-from collections import Counter
 
 today = day(2025, 1)
 
 
-def part1(inp):
+def unlock_safe(instructions):
   dial = 50
-  count = 0
-  for d, s in inp:
-    dial += s if d == 'R' else -s
-    count += (dial % 100) == 0
-  return count
-
-
-def part2(inp):
-  dial = 50
-  count = 0
-  for d, s in inp:
-    m = 1 if d == 'R' else -1
-    for _ in range(s):
-      dial += m
-      count += (dial % 100) == 0
-  return count
+  star1 = star2 = 0
+  for clicks in instructions:
+    prev = dial
+    loops, dial = divmod(dial + clicks, 100)
+    star1 += dial == 0
+    star2 += abs(loops)
+    star2 -= prev == 0 and loops < 0 # started on 0 when moving left
+    star2 += dial == 0 and clicks < 0 # ended on 0 after moving left
+  return star1, star2
 
 
 def parse(line):
-  return line[0], int(line[1:])
+  m = 1 if line[0] == 'R' else -1
+  return m*int(line[1:])
 
 
 def main():
-  inp = list(get_data(today, parse))
-  star1 = part1(inp)
+  instructions = get_data(today, parse)
+  star1, star2 = unlock_safe(instructions)
   print(f'{today} star 1 = {star1}')
-  star2 = part2(inp)
   print(f'{today} star 2 = {star2}')
 
 
