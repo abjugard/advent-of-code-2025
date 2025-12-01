@@ -11,11 +11,15 @@ aoc_response_time_re = re.compile(r'You have ((?P<minutes>\d+)m |)(?P<seconds>\d
 standard_answer_re = re.compile(r'(\d{4}-\d{2}-\d{2}) star (\d) = (.+)')
 
 
+def histfile(today: date, level: int, suffix: str = '.json'):
+  return f'{today.year}-{today.day:02}.{str(level)}{suffix}'
+
+
 def get_submission_history(today: date, level: int):
   if not aoc_submission_history.exists():
     aoc_submission_history.mkdir()
   
-  file_path = aoc_submission_history / f'day{today.day:02}.{str(level)}.json'
+  file_path = aoc_submission_history / histfile(today, level)
   if not file_path.exists():
     return dict()
 
@@ -32,7 +36,7 @@ def wait_until(unlock_time):
 
 
 def __handle_response__(today: date, answer, level, submission_history, text):
-  file_path = aoc_submission_history / f'day{today.day:02}.{str(level)}.json'
+  file_path = aoc_submission_history / histfile(today, level)
 
   new_entry = {
     'timestamp': datetime.now().isoformat()
@@ -140,7 +144,7 @@ def submit_answer(today: date, answer, level: int = 1, force = False) -> bool | 
   url = f'https://adventofcode.com/{today.year}/day/{today.day}/answer'
   payload = {'level': level, 'answer': answer}
   res = request('POST', url, cookies=config, data=payload)
-  with (aoc_submission_history / f'day{today.day:02}.{str(level)}-last_response.html').open('wb') as f:
+  with (aoc_submission_history / histfile(today, level, '-last_response.html')).open('wb') as f:
     f.write(res.content)
 
   soup = beautiful_soup(res.content, 'html.parser')
