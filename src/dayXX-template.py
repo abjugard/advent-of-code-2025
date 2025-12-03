@@ -1,7 +1,7 @@
 from santas_little_helpers import day, get_data, timed
 from santas_little_submission_helper import submit_answer
 from santas_little_utils import *
-from collections import Counter
+from collections import Counter, defaultdict
 
 today = day(2025, XX)
 
@@ -9,14 +9,14 @@ today = day(2025, XX)
 def part1(inp):
   res = 0
   for l in inp:
-    res += 1
+    print(l)
   return None
 
 
 def part2(inp):
   res = 0
   for l in inp:
-    res += 1
+    print(l)
   return None
 
 
