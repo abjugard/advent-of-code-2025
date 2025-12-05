@@ -2,6 +2,7 @@ from santas_little_helpers import day, get_data, timed
 from santas_little_submission_helper import submit_answer
 from santas_little_utils import *
 from collections import Counter, defaultdict
+from itertools import combinations, combinations_with_replacement, permutations
 
 today = day(2025, XX)
 
@@ -10,14 +11,16 @@ def part1(inp):
   res = 0
   for l in inp:
     print(l)
-  return None
+  print(res)
+  # return res
 
 
 def part2(inp):
   res = 0
   for l in inp:
     print(l)
-  return None
+  print(res)
+  # return res
 
 
 def parse(line):
