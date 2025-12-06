@@ -1,5 +1,5 @@
 from collections import deque, defaultdict, namedtuple
-from itertools import product
+from itertools import product, zip_longest
 
 from santas_little_helpers import alphabet
 
@@ -101,7 +101,6 @@ def find_bounds(points):
     max_w = max(max_w, x)
     min_h = min(min_h, y)
     max_h = max(max_h, y)
-  # print(min_w, max_w, min_h, max_h)
   return max_h, max_w, min_h, min_w
 
 
@@ -176,8 +175,16 @@ def mul(numbers):
   return result
 
 
-def transpose(l):
-  return list(map(list, zip(*l)))
+def lines_to_grid(lines):
+  grid = [list(l) for l in lines]
+  return (len(grid[0]), len(grid)), grid
+
+
+def transpose(l, join=False, fill=None):
+  transposed = list(map(list, zip_longest(*l, fillvalue=fill)))
+  if join:
+    return [''.join(n) for n in transpose(l)]
+  return transposed
 
 
 def flatten(list_of_lists):
