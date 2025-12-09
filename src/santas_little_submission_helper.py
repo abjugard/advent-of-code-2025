@@ -94,8 +94,8 @@ def __handle_response__(today: date, answer, level, submission_history, text):
     wait_until(unlock_time)
     return submit_answer(today, answer, level)
   else:
-    if new_entry['success'] and today.day == 25 and level == 1:
-      print('AoC complete, auto-submitting 25 part 2')
+    if new_entry['success'] and today.day == 12 and level == 1:
+      print('AoC complete, auto-submitting 12 part 2')
       submit_answer(today, 'Merry christmas team!', level=2, force=True)
     return new_entry['success']
 
