@@ -2,8 +2,10 @@ from santas_little_helpers import day, get_data, timed
 from santas_little_submission_helper import submit_answer
 from santas_little_utils import *
 from santas_little_classes import *
-from collections import Counter, defaultdict
+from collections import Counter, defaultdict, deque
 from itertools import combinations, combinations_with_replacement, permutations
+from functools import cache
+import networkx as nx
 
 today = day(2025, XX)
 
@@ -29,7 +31,7 @@ def parse(line):
 
 
 def main():
-  inp = get_data(today, parse)
+  inp = list(get_data(today, parse))
   star1 = part1(inp)
   print(f'{today} star 1 = {star1}')
   submit_answer(today, star1, level=1)
